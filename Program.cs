@@ -10,19 +10,29 @@ namespace TestTransaction
 
         static async Task Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Agilpay API Test console\n");
+
+            ///  OAUTH 2.0
+            
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Client_id [API-001]:");
             var client_id = Console.ReadLine();
-            client_id = string.IsNullOrEmpty(client_id) ? "API-001": client_id;
+            client_id = string.IsNullOrEmpty(client_id) ? "API-001" : client_id;
 
             Console.Write("Secret [Dynapay]:");
             var secret = Console.ReadLine();
-            secret = string.IsNullOrEmpty(secret)? "Dynapay": secret;
-
+            secret = string.IsNullOrEmpty(secret) ? "Dynapay" : secret;
             string token = await GetTokenAsync(_baseUrl, client_id, secret);
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OAuth 2.0 token:\n" + token);
 
-
+            ///  Balance
+            
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Merchant Key [TEST-001]:");
+
             var merchant_key = Console.ReadLine();
             merchant_key = string.IsNullOrEmpty(merchant_key) ? "TEST-001" : merchant_key;
 
@@ -31,8 +41,12 @@ namespace TestTransaction
             customer_id = string.IsNullOrEmpty(customer_id) ? "123456" : customer_id;
 
             var resultBalance = await GetBalance(_baseUrl, token, client_id, merchant_key, customer_id);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Balance Result:\n" + resultBalance);
 
+            // PAYMENT
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\nPayment Amount:");
             var amount = Console.ReadLine();
             amount = string.IsNullOrEmpty(amount) ? "1.02" : amount;
