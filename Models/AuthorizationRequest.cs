@@ -18,4 +18,10 @@
         public string Transaction_Detail { get; set; }
 
     }
+
+    internal class BalanceRequest
+    {
+        public string MerchantKey { get; set; }
+        public string CustomerId { get; set; }
+    }
 }
